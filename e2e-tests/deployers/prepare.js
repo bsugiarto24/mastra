@@ -19,10 +19,7 @@ export async function setupDeployerProject(pathToStoreFiles, tag, pkgManager, de
 
   await mkdir(newPath, { recursive: true });
   await cp(projectPath, newPath, { recursive: true });
-  await writeFile(
-    join(newPath, '.npmrc'),
-    `minimum-release-age=0\n${registry ? `registry=${registry}\n` : ''}`,
-  );
+  await writeFile(join(newPath, '.npmrc'), `minimum-release-age=0\n${registry ? `registry=${registry}\n` : ''}`);
   await writeFile(
     join(newPath, 'pnpm-workspace.yaml'),
     "packages:\n  - '.'\nallowBuilds:\n  esbuild: true\n  sharp: true\n  protobufjs: true\n  workerd: true\n  bufferutil: true\n  utf-8-validate: true\n",
